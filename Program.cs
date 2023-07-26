@@ -2,61 +2,29 @@
 // 0, 7, 8, -2, -2 -> 2
 // 1, -7, 567, 89, 223-> 3
 
-Console.Write("Введите числа: ");
-int[] numbers = StringToNum(Console.ReadLine()!);
-PrintArray(numbers);
-int sum = 0;
-for (int i = 0; i < numbers.Length; i++)
-{
-    if (numbers[i] > 0)
-    {
-        sum++;
-    }
-}
-Console.WriteLine();
-Console.Write($"Количество чисел больше 0 = {sum}");
+Console.Clear();
+int[] array = NewArray();
+int count = Count(array);
+Console.WriteLine($"Количество чисел больше 0 = {count}");
+Console.WriteLine(String.Join(" ", array));
 
-int[] StringToNum(string input)
+
+int[] NewArray()
 {
-    int count = 1;
-    for (int i = 0; i < input.Length; i++)
+    Console.Write("Введите числа через пробел: ");
+    int[] arr = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+    return arr;
+}
+
+int Count(int[] arr)
+{
+    int count = 0;
+    for (int i = 0; i < arr.Length; i++)
     {
-        if (input[i] == ",")
+        if (arr[i] > 0)
         {
             count++;
         }
     }
-    int[] numbers = new int [count];
-    int index = 0;
-
-    for (int i = 0; i < input.Length; i++)
-    {
-        string temp = "";
-
-        while (input[i] != ",")
-        {
-            if (i != input.Length -1)
-            {
-                temp += input[i].ToString();
-                i++;
-            }
-            else{
-                temp += input[i].ToString();
-                break;
-            }
-        }
-        numbers[index] = Convert.ToInt32(temp);
-        index++;
-    }
-    return numbers;
+    return count;
 }
-
-void PrintArray(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i] + " ");
-    }
-}
-
-
